@@ -1,12 +1,12 @@
+
 pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "potnuru2002/python-cicd-web"
+        IMAGE_NAME = 'potnuru2002/python-cicd-web'
     }
 
     stages {
-
         stage('Checkout') {
             steps {
                 checkout scm
@@ -50,8 +50,8 @@ pipeline {
                 ]) {
                     sh '''
                         echo "$DOCKER_PASSWORD" | docker login \
-                        -u "$DOCKER_USERNAME" \
-                        --password-stdin
+                            -u "$DOCKER_USERNAME" \
+                            --password-stdin
 
                         docker push $IMAGE_NAME:$BUILD_NUMBER
                         docker push $IMAGE_NAME:latest
@@ -65,5 +65,5 @@ pipeline {
                 sh 'sudo /usr/local/bin/deploy-python-cicd.sh'
             }
         }
-   }
+    }
 }
